@@ -31,9 +31,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     FLASK_ENV=production \
     FLASK_APP=app_main.py
 
-# 安装 Nginx
+# 安装 Nginx 和 curl（健康检查用）
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # 创建工作目录
