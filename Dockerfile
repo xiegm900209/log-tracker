@@ -55,8 +55,9 @@ COPY --from=frontend-builder /app/frontend/dist /var/www/log-tracker
 # 复制 Nginx 配置
 COPY nginx-docker.conf /etc/nginx/conf.d/default.conf
 
-# 创建日志目录（容器内不需要挂载外部日志）
-RUN mkdir -p /var/log/nginx
+# 创建日志目录并删除默认配置
+RUN mkdir -p /var/log/nginx \
+    && rm -f /etc/nginx/sites-enabled/default
 
 # 暴露端口
 EXPOSE 80
