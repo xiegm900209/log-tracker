@@ -16,9 +16,9 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # 检查镜像是否存在
-if ! docker images log-tracker | grep -q v2.3.5; then
+if ! docker images log-tracker | grep -q v2.3.6; then
     echo "📦 镜像不存在，开始构建..."
-    docker build -t log-tracker:v2.3.5 .
+    docker build -t log-tracker:v2.3.6 .
 fi
 
 # 停止并删除旧容器
@@ -33,7 +33,7 @@ docker run -d \
   -v /root/sft/testlogs:/app/logs:ro \
   -v "$SCRIPT_DIR/config:/app/config" \
   --restart unless-stopped \
-  log-tracker:v2.3.5
+  log-tracker:v2.3.6
 
 # 等待容器启动
 echo "⏳ 等待服务启动..."
