@@ -41,27 +41,27 @@
         </el-form-item>
 
         <el-form-item label="服务">
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <el-select 
-              v-model="queryForm.service" 
-              placeholder="选择服务"
-              clearable
-              style="width: 200px"
-            >
-              <el-option
-                v-for="service in services"
-                :key="service"
-                :label="service"
-                :value="service"
-              ></el-option>
-            </el-select>
-            <div style="display: flex; gap: 8px;">
-              <el-button type="primary" @click="searchLogs" :loading="loading" size="small">查询</el-button>
-              <el-button @click="resetForm" size="small">重置</el-button>
-            </div>
-          </div>
+          <el-select 
+            v-model="queryForm.service" 
+            placeholder="选择服务"
+            clearable
+            style="width: 200px"
+          >
+            <el-option
+              v-for="service in services"
+              :key="service"
+              :label="service"
+              :value="service"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
+
+      <!-- 查询和重置按钮放在下一行中间 -->
+      <div class="form-actions">
+        <el-button type="primary" @click="searchLogs" :loading="loading">查询</el-button>
+        <el-button @click="resetForm">重置</el-button>
+      </div>
 
       <div class="form-tips">
         <el-alert
@@ -351,6 +351,15 @@ export default {
 
 .query-card {
   margin-bottom: 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #e4e7ed;
 }
 
 .form-tips {
