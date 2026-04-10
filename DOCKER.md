@@ -43,12 +43,17 @@ docker-compose up -d
 
 ### 挂载日志目录
 
-容器需要访问日志文件，通过 volume 挂载：
+⚠️ **重要**: 容器需要访问日志文件才能查询日志，必须挂载日志目录！
 
 ```yaml
 volumes:
-  - /你的/日志/路径:/app/logs:ro
+  - /root/sft/testlogs:/app/logs:ro
 ```
+
+**说明**:
+- `/root/sft/testlogs` - 替换为你的实际日志路径
+- `/app/logs` - 容器内路径，不要修改
+- `:ro` - 只读模式，安全
 
 ### 自定义配置
 
@@ -60,9 +65,24 @@ volumes:
 ```
 
 配置文件：
-- `config/log_dirs.json` - 日志目录配置
-- `config/transaction_types.json` - 交易类型配置
+- `config/log_dirs.json` - 日志目录配置（34 个应用）
+- `config/transaction_types.json` - 交易类型配置（12 个交易类型）
 - `config/app_config.json` - 应用配置
+
+### 同步配置
+
+从运行中的实例同步配置：
+
+```bash
+# 使用同步脚本
+./sync-config.sh
+
+# 或手动同步
+curl http://172.16.2.164:8083/api/transaction-types > config/transaction_types.json
+curl http://172.16.2.164:8083/api/config/log-dirs > config/log_dirs.json
+```
+
+配置会自动加载到容器中（无需重启）。
 
 ---
 
