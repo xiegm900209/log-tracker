@@ -31,7 +31,7 @@
             v-model="queryForm.logTime" 
             placeholder="格式：2026040809 (年月日时) *必填"
             clearable
-            style="width: 180px"
+            style="width: 280px"
             maxlength="10"
           >
             <template #prefix>
